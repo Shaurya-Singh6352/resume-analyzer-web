@@ -1,7 +1,9 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:resume_analyzer_web/pages/login_page.dart';
 import 'package:resume_analyzer_web/pages/result_page.dart';
 import 'package:resume_analyzer_web/services/api_service.dart';
+import 'package:resume_analyzer_web/services/auth_service.dart';
 import 'package:resume_analyzer_web/theme.dart';
 
 // What the backend scores, shown so people know what is being judged.
@@ -72,9 +74,29 @@ class _UploadPageState extends State<UploadPage> {
     }
   }
 
+  Future<void> _logout() async {
+    await AuthService.instance.logout();
+    if (!mounted) return;
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (_) => const LoginPage()),
+          (route) => false,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        actions: [
+          TextButton.icon(
+            onPressed: _logout,
+            icon: const Icon(Icons.logout, size: 18),
+            label: const Text('Log out'),
+          ),
+        ],
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),

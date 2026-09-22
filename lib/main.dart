@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:resume_analyzer_web/pages/login_page.dart';
 import 'package:resume_analyzer_web/pages/upload_page.dart';
+import 'package:resume_analyzer_web/services/auth_service.dart';
 import 'package:resume_analyzer_web/theme.dart';
 
-void main() => runApp(const ResumeAnalyzerApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await AuthService.instance.restoreSession();
+  runApp(const ResumeAnalyzerApp());
+}
 
 class ResumeAnalyzerApp extends StatelessWidget {
   const ResumeAnalyzerApp({super.key});
@@ -13,7 +19,7 @@ class ResumeAnalyzerApp extends StatelessWidget {
       title: 'Resume Analyzer',
       debugShowCheckedModeBanner: false,
       theme: buildTheme(),
-      home: const UploadPage(),
+      home: AuthService.instance.isLoggedIn ? const UploadPage() : const LoginPage(),
     );
   }
 }
