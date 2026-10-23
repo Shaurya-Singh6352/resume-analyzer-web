@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:resume_analyzer_web/models/analysis_result.dart';
 import 'package:resume_analyzer_web/theme.dart';
 
-// One-line explanation under each category. Falls back to nothing if the
-// backend adds a category we don't know about yet.
 const _hints = {
   'Contact info': 'Email, phone, LinkedIn, GitHub',
   'Sections': 'Education, Experience, Skills and Projects headings',
@@ -122,10 +120,6 @@ class _SectionTitle extends StatelessWidget {
       Text(text, style: AppText.display(22));
 }
 
-// ---------------------------------------------------------------------------
-// Score
-// ---------------------------------------------------------------------------
-
 class _ScoreHeadline extends StatelessWidget {
   final AnalysisResult result;
   final bool wide;
@@ -155,7 +149,6 @@ class _ScoreHeadline extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // The one animated moment: the number counts up when the page opens.
         TweenAnimationBuilder<double>(
           tween: Tween(begin: 0, end: score.toDouble()),
           duration: const Duration(milliseconds: 900),
@@ -204,9 +197,6 @@ class _Breakdown extends StatelessWidget {
   }
 }
 
-/// One bar for the whole 100 points. Each segment is as wide as its category's
-/// maximum, and filled by how much of it was earned, so you can see at a
-/// glance where points were lost.
 class _PointsBar extends StatelessWidget {
   final List<CategoryScore> categories;
   const _PointsBar({required this.categories});
@@ -307,12 +297,6 @@ class _CategoryRow extends StatelessWidget {
   }
 }
 
-// ---------------------------------------------------------------------------
-// Feedback
-// ---------------------------------------------------------------------------
-
-/// Shows the first few suggestions, with a toggle for the rest, so a weak
-/// resume doesn't open with a wall of fourteen tips.
 class _FixList extends StatefulWidget {
   final List<String> items;
   const _FixList({required this.items});
@@ -362,7 +346,6 @@ class _FixRow extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Highlighter mark: the yellow is used only for things to act on.
             Container(
               width: 4,
               decoration: BoxDecoration(

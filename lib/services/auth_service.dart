@@ -1,8 +1,6 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:resume_analyzer_web/models/auth_result.dart';
 
-/// Holds the current session in memory and on disk (browser secure storage),
-/// so a page refresh doesn't log the person out.
 class AuthService {
   AuthService._internal();
   static final AuthService instance = AuthService._internal();
@@ -19,11 +17,8 @@ class AuthService {
   String? get fullName => _fullName;
   String? get email => _email;
 
-  /// Called once when the app starts, to restore a session after a refresh.
   Future<void> restoreSession() async {
     _token = await _storage.read(key: _tokenKey);
-    // We only persist the token; name/email are re-attached on next login.
-    // Good enough for now — a "who am I" endpoint would replace this later.
   }
 
   Future<void> saveSession(AuthResult result) async {

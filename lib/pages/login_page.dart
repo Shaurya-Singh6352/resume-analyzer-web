@@ -38,7 +38,7 @@ class _LoginPageState extends State<LoginPage> {
       if (!mounted) return;
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (_) => const UploadPage()),
-            (route) => false, // clears the login page from the back stack
+            (route) => false,
       );
     } on ApiException catch (e) {
       setState(() => _error = e.message);

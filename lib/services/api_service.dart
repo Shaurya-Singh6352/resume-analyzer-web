@@ -4,7 +4,6 @@ import 'package:resume_analyzer_web/models/analysis_result.dart';
 import 'package:resume_analyzer_web/models/auth_result.dart';
 import 'package:resume_analyzer_web/services/auth_service.dart';
 
-// Override at build time: flutter run --dart-define=API_URL=https://...
 const String apiBase =
 String.fromEnvironment('API_URL', defaultValue: 'http://localhost:8080');
 
@@ -23,8 +22,6 @@ class ApiService {
   ));
 
   ApiService() {
-    // Attaches the JWT to every request, if we have one. Auth endpoints
-    // don't need it, but sending it there is harmless.
     _dio.interceptors.add(InterceptorsWrapper(
       onRequest: (options, handler) {
         final token = AuthService.instance.token;
@@ -65,7 +62,6 @@ class ApiService {
     }
   }
 
-  /// Uploads the file, then fetches its analysis.
   Future<AnalysisResult> uploadAndAnalyze(PlatformFile file) async {
     try {
       final form = FormData.fromMap({

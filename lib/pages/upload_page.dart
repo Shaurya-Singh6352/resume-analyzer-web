@@ -6,7 +6,6 @@ import 'package:resume_analyzer_web/services/api_service.dart';
 import 'package:resume_analyzer_web/services/auth_service.dart';
 import 'package:resume_analyzer_web/theme.dart';
 
-// What the backend scores, shown so people know what is being judged.
 const _scoring = [
   ('Contact info', 10),
   ('Sections', 20),
@@ -15,7 +14,7 @@ const _scoring = [
   ('Length & style', 15),
 ];
 
-const _maxBytes = 5 * 1024 * 1024; // matches the 5MB limit on the backend
+const _maxBytes = 5 * 1024 * 1024;
 
 class UploadPage extends StatefulWidget {
   const UploadPage({super.key});
@@ -35,9 +34,9 @@ class _UploadPageState extends State<UploadPage> {
     final result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowedExtensions: ['pdf', 'docx', 'doc'],
-      withData: true, // required on web: gives us the file bytes
+      withData: true,
     );
-    if (result == null) return; // user cancelled
+    if (result == null) return;
     final file = result.files.single;
 
     if (file.size > _maxBytes) {

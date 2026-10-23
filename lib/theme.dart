@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-/// Palette: a cool paper background, deep petrol for actions, and a
-/// highlighter yellow used only to mark things worth attention.
 class AppColors {
   static const bg = Color(0xFFF4F6F8);
   static const ink = Color(0xFF111827);
@@ -16,14 +14,12 @@ class AppColors {
   static const bad = Color(0xFFD64545);
 }
 
-/// Green, amber or red depending on how much of the maximum was earned.
 Color scoreColor(double fraction) {
   if (fraction >= 0.8) return AppColors.good;
   if (fraction >= 0.6) return AppColors.warn;
   return AppColors.bad;
 }
 
-/// Fraunces (serif) for headings and the big score, Figtree for everything else.
 class AppText {
   static TextStyle display(double size) => GoogleFonts.fraunces(
     fontSize: size,
